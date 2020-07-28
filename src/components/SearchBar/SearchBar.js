@@ -1,31 +1,42 @@
-import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import style from "./SearchBar.module.css";
 
 export default class SearchBar extends Component {
   state = {
-    value: '',
+    value: "",
   };
 
-  handelChange = e => {
+  handelChange = (e) => {
     this.setState({ value: e.target.value });
   };
 
-  handelSubmit = e => {
+  handelSubmit = (e) => {
     e.preventDefault();
 
     const { onSubmit } = this.props;
     const { value } = this.state;
     onSubmit(value);
-    this.setState({ value: '' });
+    this.setState({ value: "" });
   };
 
   render() {
     const { value } = this.state;
     return (
-      <form onSubmit={this.handelSubmit}>
-        <input onChange={this.handelChange} value={value} type="text" />
-        <button type="submit">Search</button>
-      </form>
+      <div className={style.wrapper}>
+        <form className={style.form_search} onSubmit={this.handelSubmit}>
+          <input
+            placeholder="Search movies"
+            size="30"
+            className={style.form_search__input}
+            onChange={this.handelChange}
+            value={value}
+            type="text"
+          />
+          <button className={style.form_search__button} type="submit">
+            Search
+          </button>
+        </form>
+      </div>
     );
   }
 }

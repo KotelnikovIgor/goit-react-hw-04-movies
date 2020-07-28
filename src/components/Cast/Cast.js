@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import * as API from '../../services/api';
+import React, { Component } from "react";
+import * as API from "../../services/api";
+import style from "./Cast.module.css";
+import defaultImage from "../../assets/image/avatarDefault.png";
 
 export default class Cast extends Component {
   state = {
@@ -11,22 +13,28 @@ export default class Cast extends Component {
     this.searchMoviesCast(params.movieId);
   }
 
-  searchMoviesCast = id => {
-    API.getMovieCast(id).then(res => this.setState({ cast: res.data.cast }));
+  searchMoviesCast = (id) => {
+    API.getMovieCast(id).then((res) => this.setState({ cast: res.data.cast }));
   };
 
   render() {
     const { cast } = this.state;
     return (
-      <ul>
-        {cast.map(el => (
-          <li key={el.cast_id}>
+      <ul className={style.cast_list}>
+        {cast.map((el) => (
+          <li className={style.cast_list__item} key={el.cast_id}>
             <img
-              src={`https://image.tmdb.org/t/p/w200${el.profile_path}`}
+              className={style}
+              src={
+                el.profile_path
+                  ? `https://image.tmdb.org/t/p/w200${el.profile_path}`
+                  : defaultImage
+              }
               alt=""
+              width="200px"
+              height="300px"
             />
             <p>{el.name}</p>
-            <p>{el.character}</p>
           </li>
         ))}
       </ul>

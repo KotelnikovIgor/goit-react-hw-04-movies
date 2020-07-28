@@ -1,6 +1,6 @@
 {
-  "name": "goit-react-hw-04-movies",
-  "homepage": "https://kotelnikovigor.github.io/goit-react-hw-04-movies/",
+  "name": "react-movies",
+  "homepage": "https://kotelnikovigor.github.io/react-movies/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,11 +13,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --verbose",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint src/**/*.js --fix",
-    "lint:format": "prettier src/**/*.{js,css,json} --write",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -36,14 +34,7 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.17.0",
-    "husky": "^3.1.0",
-    "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1"
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2"
   }
 }

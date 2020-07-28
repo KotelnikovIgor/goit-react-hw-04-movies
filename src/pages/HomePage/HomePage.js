@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import * as API from '../../services/api';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import * as API from "../../services/api";
+import style from "./HomePage.module.css";
 
 export default class HomePage extends Component {
   state = {
@@ -13,28 +14,31 @@ export default class HomePage extends Component {
   }
 
   popularSearchMovies = () => {
-    API.popularMovies().then(res => {
+    API.popularMovies().then((res) => {
       this.setState({ movies: res.data.results });
     });
-
-    // fetch(
-    //   'https://api.themoviedb.org/3/trending/all/day?api_key=2964dee6f9b3937b53e885a7fa2424ff',
-    // )
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({ movies: data.results });
-    //   });
   };
 
   render() {
     const { movies } = this.state;
     return (
-      <div>
-        <ul>
-          {movies.map(el => (
-            <li key={el.id}>
-              <Link to={`/movies/${el.id}`}>{el.title || el.name}</Link>
-            </li>
+      <div className={style.wrapper}>
+        <ul className={style.movies_list}>
+          {movies.map((el) => (
+            <NavLink
+              className={style.movies_list__link}
+              to={`/movies/${el.id}`}
+            >
+              <li className={style.movies_list__item} key={el.id}>
+                <img
+                  className={style.movies_list__image}
+                  src={`https://image.tmdb.org/t/p/w200${el.poster_path}`}
+                  alt=""
+                />
+                <p>{el.title || el.name}</p>
+                <p>Рейтинг: {el.vote_average}</p>
+              </li>
+            </NavLink>
           ))}
         </ul>
       </div>

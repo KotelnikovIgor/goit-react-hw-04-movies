@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import * as API from '../../services/api';
+import React, { Component } from "react";
+import * as API from "../../services/api";
+import style from "./Reviews.module.css";
 
 export default class Reviews extends Component {
   state = {
@@ -11,21 +12,22 @@ export default class Reviews extends Component {
     this.searchMoviesReviews(params.movieId);
   }
 
-  searchMoviesReviews = id => {
-    API.getMovieReviews(id).then(res =>
-      this.setState({ reviews: res.data.results }),
+  searchMoviesReviews = (id) => {
+    API.getMovieReviews(id).then((res) =>
+      this.setState({ reviews: res.data.results })
     );
   };
 
   render() {
     const { reviews } = this.state;
     return (
-      <ul>
+      <ul className={style.reviews_list}>
         {(reviews.length > 0 &&
-          reviews.map(el => (
-            <li key={el.id}>
-              <p>Author:{el.author}</p>
-              <p>{el.content}</p>
+          reviews.map((el) => (
+            <li className={style.reviews_list__item} key={el.id}>
+              <p className={style.reviews_text__author}>Author: {el.author}</p>
+              <hr />
+              <p className={style.reviews_text__content}>{el.content}</p>
             </li>
           ))) || <p>Sorry</p>}
       </ul>

@@ -1,0 +1,14 @@
+.reviews_list {
+  list-style: none;
+}
+.reviews_text__author {
+  margin: 0;
+  padding: 0;
+  margin: 0 0 5px 0;
+  font-weight: 800;
+}
+.reviews_text__content {
+  margin: 0;
+  padding: 0;
+  margin: 0 0 10px 0;
+}

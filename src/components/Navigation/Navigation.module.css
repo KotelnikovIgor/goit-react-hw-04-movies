@@ -1,0 +1,31 @@
+.nav {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+
+.nav_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  min-height: 80px;
+  align-items: center;
+}
+
+.nav_list__items {
+  margin: 0 10px 0 0;
+}
+
+.nav_list__items:last-child {
+  margin: 0;
+}
+
+.nav_list__item {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.nav_list__item:hover {
+  color: #3b8d99;
+}

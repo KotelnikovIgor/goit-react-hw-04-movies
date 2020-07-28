@@ -1,0 +1,33 @@
+.wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.movies_list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.movies_list__link {
+  text-decoration: none;
+  margin: 0 0 15px 0;
+  color: black;
+}
+
+.movies_list__item {
+  max-width: 200px;
+}
+
+.movies_list__item p {
+  margin: 0;
+  padding: 0;
+}
+
+.movies_list__image {
+  border-radius: 5px;
+}

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import * as API from '../../services/api';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import * as API from "../../services/api";
+import style from "./MoviesPage.module.css";
 
 export default class MoviesPage extends Component {
   state = {
@@ -11,7 +11,7 @@ export default class MoviesPage extends Component {
 
   componentDidMount() {
     const { location } = this.props;
-    const currentSearch = new URLSearchParams(location.search).get('search');
+    const currentSearch = new URLSearchParams(location.search).get("search");
     if (!currentSearch) {
       return;
     }
@@ -20,12 +20,12 @@ export default class MoviesPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const prevSearch = new URLSearchParams(prevProps.location.search).get(
-      'search',
+      "search"
     );
     const { location } = this.props;
-    const currentSearch = new URLSearchParams(location.search).get('search');
-    console.log('prevSearch :', prevSearch);
-    console.log('currentSearch :', currentSearch);
+    const currentSearch = new URLSearchParams(location.search).get("search");
+    console.log("prevSearch :", prevSearch);
+    console.log("currentSearch :", currentSearch);
 
     if (prevSearch && prevSearch === currentSearch) {
       return;
@@ -34,13 +34,13 @@ export default class MoviesPage extends Component {
     this.fetchFilms(currentSearch);
   }
 
-  fetchFilms = query => {
-    API.searchFilms(query).then(res =>
-      this.setState({ films: res.data.results }),
+  fetchFilms = (query) => {
+    API.searchFilms(query).then((res) =>
+      this.setState({ films: res.data.results })
     );
   };
 
-  onSearchSubmit = query => {
+  onSearchSubmit = (query) => {
     const { history, location } = this.props;
 
     history.push({ ...location, search: `?search=${query}` });
@@ -48,16 +48,37 @@ export default class MoviesPage extends Component {
 
   render() {
     const { films } = this.state;
+    console.log(films);
     return (
       <div>
         <SearchBar onSubmit={this.onSearchSubmit} />
-        <ul>
-          {films.map(el => (
+        {/* <ul>
+          {films.map((el) => (
             <li key={el.id}>
-              <Link to={`/movies/${el.id}`}>{el.title || el.name}</Link>
+              <NavLink to={`/movies/${el.id}`}>{el.title || el.name}</NavLink>
             </li>
           ))}
-        </ul>
+        </ul> */}
+        <div className={style.wrapper}>
+          <ul className={style.movies_list}>
+            {films.map((el) => (
+              <NavLink
+                className={style.movies_list__link}
+                to={`/movies/${el.id}`}
+              >
+                <li className={style.movies_list__item} key={el.id}>
+                  <img
+                    className={style.movies_list__image}
+                    src={`https://image.tmdb.org/t/p/w200${el.poster_path}`}
+                    alt=""
+                  />
+                  <p>{el.title || el.name}</p>
+                  <p>Рейтинг: {el.vote_average}</p>
+                </li>
+              </NavLink>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
